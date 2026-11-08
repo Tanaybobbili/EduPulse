@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Current_Mentees</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+    Current_Mentees__c &lt; 0,
+    Current_Mentees__c &gt; Maximum_Capacity__c
+)</errorConditionFormula>
+    <errorDisplayField>Current_Mentees__c</errorDisplayField>
+    <errorMessage>Current mentees cannot be negative or exceed maximum capacity.</errorMessage>
+</ValidationRule>

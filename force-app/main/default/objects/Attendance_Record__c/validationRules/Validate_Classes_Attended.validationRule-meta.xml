@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Classes_Attended</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+    Classes_Attended__c &lt; 0,
+    Classes_Attended__c &gt; Total_Classes__c
+)</errorConditionFormula>
+    <errorDisplayField>Classes_Attended__c</errorDisplayField>
+    <errorMessage>Classes attended must be between zero and total classes.</errorMessage>
+</ValidationRule>

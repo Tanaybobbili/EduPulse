@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Marks_Obtained</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+    Marks_Obtained__c &lt; 0,
+    Marks_Obtained__c &gt; Maximum_Marks__c
+)</errorConditionFormula>
+    <errorDisplayField>Marks_Obtained__c</errorDisplayField>
+    <errorMessage>Marks obtained must be between zero and maximum marks.</errorMessage>
+</ValidationRule>

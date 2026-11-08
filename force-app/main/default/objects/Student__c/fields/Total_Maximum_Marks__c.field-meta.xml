@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Maximum_Marks__c</fullName>
+    <label>Total Maximum Marks</label>
+    <summarizedField>Assessment__c.Maximum_Marks__c</summarizedField>
+    <summaryForeignKey>Assessment__c.Student__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

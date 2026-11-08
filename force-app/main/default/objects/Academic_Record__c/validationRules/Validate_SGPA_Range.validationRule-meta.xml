@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_SGPA_Range</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(SGPA__c)),
+    OR(
+        SGPA__c &lt; 0,
+        SGPA__c &gt; 10
+    )
+)</errorConditionFormula>
+    <errorDisplayField>SGPA__c</errorDisplayField>
+    <errorMessage>SGPA must be between 0 and 10.</errorMessage>
+</ValidationRule>

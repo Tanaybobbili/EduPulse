@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Maximum_Capacity</fullName>
+    <active>true</active>
+    <errorConditionFormula>Maximum_Capacity__c &lt; 0</errorConditionFormula>
+    <errorDisplayField>Maximum_Capacity__c</errorDisplayField>
+    <errorMessage>Maximum capacity cannot be negative.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Performance_Score__c</fullName>
+    <formula>IF(
+    AND(
+        Academic_Record_Count__c &gt; 0,
+        Assessment_Record_Count__c &gt; 0,
+        Total_Maximum_Marks__c &gt; 0
+    ),
+    (
+        (Total_SGPA__c / Academic_Record_Count__c / 10) * 0.5
+    ) +
+    (
+        (Total_Assessment_Marks__c / Total_Maximum_Marks__c) * 0.5
+    ),
+    IF(
+        Academic_Record_Count__c &gt; 0,
+        (Total_SGPA__c / Academic_Record_Count__c) / 10,
+        IF(
+            AND(
+                Assessment_Record_Count__c &gt; 0,
+                Total_Maximum_Marks__c &gt; 0
+            ),
+            Total_Assessment_Marks__c / Total_Maximum_Marks__c,
+            0
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Performance Score</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

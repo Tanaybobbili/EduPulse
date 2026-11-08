@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_Minimum_Attendance</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(Minimum_Attendance__c)),
+    OR(
+        Minimum_Attendance__c &lt; 0,
+        Minimum_Attendance__c &gt; 100
+    )
+)</errorConditionFormula>
+    <errorDisplayField>Minimum_Attendance__c</errorDisplayField>
+    <errorMessage>Minimum attendance must be between 0 and 100.</errorMessage>
+</ValidationRule>
