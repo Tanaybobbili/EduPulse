@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>68.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>Creates a pending registration notification log whenever a new student record is created.</description>
+    <ends>
+        <name>END_ELEMENT_1</name>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+    </ends>
+    <environments>Default</environments>
+    <interviewLabel>Student Registration Notification {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Student Registration Notification</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Registration_Notification</name>
+        <label>Create Registration Notification</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>END_ELEMENT_1</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Message__c</field>
+            <value>
+                <stringValue>Your EduPulse student profile has been created successfully. Your academic progress and career opportunities will be tracked through this platform.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Notification_Type__c</field>
+            <value>
+                <stringValue>Student Registration</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Recipient_Email__c</field>
+            <value>
+                <elementReference>$Record.Email__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Pending</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Student__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject__c</field>
+            <value>
+                <stringValue>Welcome to EduPulse</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Notification_Log__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Registration_Notification</targetReference>
+        </connector>
+        <object>Student__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
