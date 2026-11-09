@@ -139,7 +139,7 @@ public with sharing class InternshipMatchingService {
                 }
             }
 
-            Decimal skillMatch = 0;
+            Decimal skillMatch = 100;
 
             if (!requiredSkills.isEmpty()) {
                 skillMatch = totalSkillScore / requiredSkills.size();

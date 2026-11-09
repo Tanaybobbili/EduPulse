@@ -283,4 +283,275 @@ private class InternshipMatchingServiceTest {
             'Invalid inputs should not create matching results.'
         );
     }
+
+        
+    @IsTest
+    static void testMinimumCGPAFailure() {
+
+        Student__c student = [
+            SELECT Id
+            FROM Student__c
+            WHERE First_Name__c = 'Arun'
+            LIMIT 1
+        ];
+
+        Career_Opportunity__c opportunity = [
+            SELECT Id, Minimum_CGPA__c
+            FROM Career_Opportunity__c
+            LIMIT 1
+        ];
+
+        opportunity.Minimum_CGPA__c = 9.5;
+        update opportunity;
+
+        Test.startTest();
+        InternshipMatchingService.calculateMatches(
+            new Set<Id>{student.Id},
+            opportunity.Id
+        );
+        Test.stopTest();
+
+        Matching_Result__c result = [
+            SELECT Is_Eligible__c, Match_Reason__c
+            FROM Matching_Result__c
+            WHERE Student__c = :student.Id
+            AND Career_Opportunity__c = :opportunity.Id
+            LIMIT 1
+        ];
+
+        System.assertEquals(false, result.Is_Eligible__c);
+        System.assert(
+            result.Match_Reason__c.contains('minimum CGPA')
+        );
+    }
+
+    @IsTest
+    static void testMinimumAttendanceFailure() {
+
+        Student__c student = [
+            SELECT Id
+            FROM Student__c
+            WHERE First_Name__c = 'Arun'
+            LIMIT 1
+        ];
+
+        Career_Opportunity__c opportunity = [
+            SELECT Id
+            FROM Career_Opportunity__c
+            LIMIT 1
+        ];
+
+        opportunity.Minimum_Attendance__c = 95;
+        update opportunity;
+
+        Test.startTest();
+        InternshipMatchingService.calculateMatches(
+            new Set<Id>{student.Id},
+            opportunity.Id
+        );
+        Test.stopTest();
+
+        Matching_Result__c result = [
+            SELECT Is_Eligible__c, Match_Reason__c
+            FROM Matching_Result__c
+            WHERE Student__c = :student.Id
+            AND Career_Opportunity__c = :opportunity.Id
+            LIMIT 1
+        ];
+
+        System.assertEquals(false, result.Is_Eligible__c);
+        System.assert(
+            result.Match_Reason__c.contains('minimum attendance')
+        );
+    }
+
+    @IsTest
+    static void testInactiveOpportunity() {
+
+        Student__c student = [
+            SELECT Id
+            FROM Student__c
+            WHERE First_Name__c = 'Arun'
+            LIMIT 1
+        ];
+
+        Career_Opportunity__c opportunity = [
+            SELECT Id
+            FROM Career_Opportunity__c
+            LIMIT 1
+        ];
+
+        opportunity.Is_Active__c = false;
+        update opportunity;
+
+        Test.startTest();
+        InternshipMatchingService.calculateMatches(
+            new Set<Id>{student.Id},
+            opportunity.Id
+        );
+        Test.stopTest();
+
+        Matching_Result__c result = [
+            SELECT Is_Eligible__c, Match_Reason__c
+            FROM Matching_Result__c
+            WHERE Student__c = :student.Id
+            AND Career_Opportunity__c = :opportunity.Id
+            LIMIT 1
+        ];
+
+        System.assertEquals(false, result.Is_Eligible__c);
+        System.assert(
+            result.Match_Reason__c.contains('inactive')
+        );
+    }
+
+    @IsTest
+    static void testExpiredOpportunity() {
+
+        Student__c student = [
+            SELECT Id
+            FROM Student__c
+            WHERE First_Name__c = 'Arun'
+            LIMIT 1
+        ];
+
+        Career_Opportunity__c opportunity = [
+            SELECT Id
+            FROM Career_Opportunity__c
+            LIMIT 1
+        ];
+
+        opportunity.Application_Deadline__c =
+            Date.today().addDays(-1);
+        update opportunity;
+
+        Test.startTest();
+        InternshipMatchingService.calculateMatches(
+            new Set<Id>{student.Id},
+            opportunity.Id
+        );
+        Test.stopTest();
+
+        Matching_Result__c result = [
+            SELECT Is_Eligible__c, Match_Reason__c
+            FROM Matching_Result__c
+            WHERE Student__c = :student.Id
+            AND Career_Opportunity__c = :opportunity.Id
+            LIMIT 1
+        ];
+
+        System.assertEquals(false, result.Is_Eligible__c);
+        System.assert(
+            result.Match_Reason__c.contains('deadline')
+        );
+    }
+
+    @IsTest
+    static void testInsufficientMandatorySkillProficiency() {
+
+        Student__c student = [
+            SELECT Id
+            FROM Student__c
+            WHERE First_Name__c = 'Arun'
+            LIMIT 1
+        ];
+
+        Student_Skill__c skill = [
+            SELECT Id, Proficiency_Level__c
+            FROM Student_Skill__c
+            WHERE Student__c = :student.Id
+            LIMIT 1
+        ];
+
+        skill.Proficiency_Level__c = 'Beginner';
+        update skill;
+
+        Career_Opportunity__c opportunity = [
+            SELECT Id
+            FROM Career_Opportunity__c
+            LIMIT 1
+        ];
+
+        Test.startTest();
+
+        InternshipMatchingService.calculateMatches(
+            new Set<Id>{student.Id},
+            opportunity.Id
+        );
+
+        Test.stopTest();
+
+        Matching_Result__c result = [
+            SELECT Is_Eligible__c, Skill_Match__c, Match_Reason__c
+            FROM Matching_Result__c
+            WHERE Student__c = :student.Id
+            AND Career_Opportunity__c = :opportunity.Id
+            LIMIT 1
+        ];
+
+        System.assertEquals(
+            false,
+            result.Is_Eligible__c,
+            'Student should be ineligible with insufficient mandatory skill proficiency.'
+        );
+
+        System.assertEquals(
+            33.33,
+            result.Skill_Match__c,
+            'Beginner proficiency against Advanced requirement should score 33.33%.'
+        );
+    }
+
+    @IsTest
+    static void testOpportunityWithoutRequiredSkills() {
+
+        Student__c student = [
+            SELECT Id
+            FROM Student__c
+            WHERE First_Name__c = 'Arun'
+            LIMIT 1
+        ];
+
+        Career_Opportunity__c opportunity = [
+            SELECT Id
+            FROM Career_Opportunity__c
+            LIMIT 1
+        ];
+
+        // Remove the opportunity's skill requirements.
+        delete [
+            SELECT Id
+            FROM Opportunity_Skill__c
+            WHERE Career_Opportunity__c = :opportunity.Id
+        ];
+
+        Test.startTest();
+
+        InternshipMatchingService.calculateMatches(
+            new Set<Id>{student.Id},
+            opportunity.Id
+        );
+
+        Test.stopTest();
+
+        Matching_Result__c result = [
+            SELECT Skill_Match__c, Is_Eligible__c
+            FROM Matching_Result__c
+            WHERE Student__c = :student.Id
+            AND Career_Opportunity__c = :opportunity.Id
+            LIMIT 1
+        ];
+
+        System.assertEquals(
+            100,
+            result.Skill_Match__c,
+            'An opportunity without skill requirements should receive 100% skill match.'
+        );
+
+        System.assertEquals(
+            true,
+            result.Is_Eligible__c,
+            'The student should remain eligible when all other requirements are satisfied.'
+        );
+    }
 }
