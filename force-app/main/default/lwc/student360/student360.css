@@ -1,0 +1,86 @@
+
+.profile-container {
+    padding: 20px;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px;
+    background: #f3f6fb;
+    border-radius: 10px;
+}
+
+.profile-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #172554;
+}
+
+.profile-header p {
+    margin-top: 5px;
+    color: #475569;
+}
+
+.risk-badge {
+    padding: 10px 18px;
+    border-radius: 20px;
+    background: #fee2e2;
+    color: #b91c1c;
+    font-weight: 700;
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.stat-card {
+    padding: 18px;
+    border-radius: 10px;
+    background: #f3f6fb;
+    border-left: 4px solid #2563eb;
+}
+
+.stat-card p {
+    color: #475569;
+}
+
+.stat-card h2 {
+    margin-top: 8px;
+    font-size: 23px;
+    font-weight: 700;
+    color: #172554;
+}
+
+.section {
+    margin-top: 25px;
+}
+
+.section h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.error-message {
+    padding: 20px;
+    color: #b91c1c;
+}
+
+@media screen and (max-width: 800px) {
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+}

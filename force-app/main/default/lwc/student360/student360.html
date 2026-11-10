@@ -1,0 +1,115 @@
+
+<template>
+    <lightning-card title="EduPulse Student 360" icon-name="standard:contact">
+
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Loading student details"></lightning-spinner>
+        </template>
+
+        <template lwc:if={error}>
+            <div class="error-message">
+                Unable to load student details. Please check the record and permissions.
+            </div>
+        </template>
+
+        <template lwc:if={student}>
+            <div class="profile-container">
+
+                <div class="profile-header">
+                    <div>
+                        <h1>{student.First_Name__c} {student.Last_Name__c}</h1>
+                        <p>{student.Name} | {student.Department__c}</p>
+                        <p>{student.Email__c}</p>
+                    </div>
+                    <div class="risk-badge">
+                        {student.Risk_Category__c} Risk
+                    </div>
+                </div>
+
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <p>CGPA</p>
+                        <h2>{student.CGPA__c}</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <p>Attendance</p>
+                        <h2>{attendanceDisplay}%</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <p>Performance</p>
+                        <h2>{performanceDisplay}%</h2>
+                    </div>
+
+                    <div class="stat-card">
+                        <p>Risk Score</p>
+                        <h2>{student.Risk_Score__c}</h2>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Academic Records</h2>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={academicRecords}
+                        columns={academicColumns}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </div>
+
+                <div class="section">
+                    <h2>Attendance History</h2>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={attendanceRecords}
+                        columns={attendanceColumns}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </div>
+
+                <div class="section">
+                    <h2>Assessments</h2>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={assessments}
+                        columns={assessmentColumns}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </div>
+
+                <div class="section">
+                    <h2>Skills</h2>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={skills}
+                        columns={skillColumns}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </div>
+
+                <div class="section">
+                    <h2>Interventions</h2>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={interventions}
+                        columns={interventionColumns}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </div>
+
+                <div class="section">
+                    <h2>Career Applications</h2>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={applications}
+                        columns={applicationColumns}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </div>
+
+            </div>
+        </template>
+
+    </lightning-card>
+</template>

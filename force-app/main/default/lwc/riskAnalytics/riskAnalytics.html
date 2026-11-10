@@ -1,0 +1,91 @@
+
+<template>
+    <lightning-card title="EduPulse Risk Analytics" icon-name="standard:dashboard">
+
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Loading risk analytics"></lightning-spinner>
+        </template>
+
+        <template lwc:if={error}>
+            <div class="error-message">
+                Unable to load risk analytics.
+            </div>
+        </template>
+
+        <template lwc:if={analytics}>
+
+            <div class="dashboard-container">
+
+                <div class="total-card">
+                    <p>Total Active Students</p>
+                    <h1>{analytics.totalStudents}</h1>
+                </div>
+
+                <h2 class="section-title">Risk Distribution</h2>
+
+                <div class="risk-grid">
+
+                    <div class="risk-card low">
+                        <p>Low Risk</p>
+                        <h2>{analytics.lowRisk}</h2>
+                        <span>{lowPercentage}%</span>
+                    </div>
+
+                    <div class="risk-card medium">
+                        <p>Medium Risk</p>
+                        <h2>{analytics.mediumRisk}</h2>
+                        <span>{mediumPercentage}%</span>
+                    </div>
+
+                    <div class="risk-card high">
+                        <p>High Risk</p>
+                        <h2>{analytics.highRisk}</h2>
+                        <span>{highPercentage}%</span>
+                    </div>
+
+                    <div class="risk-card critical">
+                        <p>Critical Risk</p>
+                        <h2>{analytics.criticalRisk}</h2>
+                        <span>{criticalPercentage}%</span>
+                    </div>
+
+                </div>
+
+                <h2 class="section-title">Risk Distribution Overview</h2>
+
+                <div class="chart-container">
+
+                    <template for:each={riskBars} for:item="item">
+                        <div class="bar-row" key={item.label}>
+                            <div class="bar-label">{item.label}</div>
+
+                            <div class="bar-track">
+                                <lightning-progress-bar
+                                    value={item.percentage}
+                                    size="medium">
+                                </lightning-progress-bar>
+                            </div>
+
+                            <div class="bar-count">{item.count}</div>
+                        </div>
+                    </template>
+
+                </div>
+
+                <h2 class="section-title">
+                    Students Requiring Attention
+                </h2>
+
+                <lightning-datatable
+                    key-field="Id"
+                    data={students}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+
+            </div>
+
+        </template>
+
+    </lightning-card>
+</template>

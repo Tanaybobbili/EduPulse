@@ -1,0 +1,50 @@
+
+<template>
+    <lightning-card title="EduPulse Student Dashboard"
+                    icon-name="standard:dashboard">
+
+        <div class="dashboard-container">
+
+            <!-- Dashboard Statistics -->
+            <div class="stats-container">
+
+                <div class="stat-card">
+                    <p class="stat-label">Total Students</p>
+                    <h2>{totalStudents}</h2>
+                </div>
+
+                <div class="stat-card">
+                    <p class="stat-label">Average CGPA</p>
+                    <h2>{averageCGPA}</h2>
+                </div>
+
+                <div class="stat-card">
+                    <p class="stat-label">Average Attendance</p>
+                    <h2>{averageAttendance}%</h2>
+                </div>
+
+                <div class="stat-card risk-card">
+                    <p class="stat-label">High Risk Students</p>
+                    <h2>{highRiskStudents}</h2>
+                </div>
+
+            </div>
+
+            <!-- Student Records -->
+            <div class="table-container">
+
+                <h2 class="section-title">Student Records</h2>
+
+                <lightning-datatable
+                    key-field="Id"
+                    data={students}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+
+            </div>
+
+        </div>
+
+    </lightning-card>
+</template>

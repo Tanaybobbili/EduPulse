@@ -1,0 +1,74 @@
+
+<template>
+    <lightning-card title="EduPulse Student Management"
+                    icon-name="standard:people">
+
+        <div class="container">
+
+            <div class="filter-section">
+
+                <lightning-input
+                    type="search"
+                    label="Search Students"
+                    placeholder="Search name, student number or email"
+                    value={searchText}
+                    onchange={handleSearch}>
+                </lightning-input>
+
+                <lightning-combobox
+                    label="Department"
+                    value={department}
+                    options={departmentOptions}
+                    onchange={handleDepartmentChange}>
+                </lightning-combobox>
+
+                <lightning-combobox
+                    label="Risk Category"
+                    value={riskCategory}
+                    options={riskOptions}
+                    onchange={handleRiskChange}>
+                </lightning-combobox>
+
+                <lightning-button
+                    label="Reset Filters"
+                    variant="neutral"
+                    onclick={resetFilters}>
+                </lightning-button>
+
+            </div>
+
+            <div class="result-info">
+                Total Students Found: {studentCount}
+            </div>
+
+            <template lwc:if={isLoading}>
+                <lightning-spinner
+                    alternative-text="Loading students">
+                </lightning-spinner>
+            </template>
+
+            <template lwc:if={error}>
+                <div class="error-message">
+                    Unable to load students. Please try again.
+                </div>
+            </template>
+
+            <template lwc:if={hasStudents}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={students}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+
+            <template lwc:if={showEmpty}>
+                <div class="empty-message">
+                    No students found for the selected filters.
+                </div>
+            </template>
+
+        </div>
+
+    </lightning-card>
+</template>
