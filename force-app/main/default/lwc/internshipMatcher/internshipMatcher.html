@@ -1,0 +1,122 @@
+
+<template>
+    <lightning-card title="Internship Matcher" icon-name="standard:job_profile">
+        <div class="slds-p-around_medium">
+
+            <!-- Student Selection -->
+            <lightning-combobox
+                name="student"
+                label="Select Student"
+                placeholder="Choose a student"
+                value={selectedStudentId}
+                options={studentOptions}
+                onchange={handleStudentChange}
+                disabled={isLoading}>
+            </lightning-combobox>
+
+            <!-- Opportunity Selection -->
+            <lightning-combobox
+                class="slds-m-top_medium"
+                name="opportunity"
+                label="Select Career Opportunity"
+                placeholder="Choose an opportunity"
+                value={selectedOpportunityId}
+                options={opportunityOptions}
+                onchange={handleOpportunityChange}
+                disabled={isLoading}>
+            </lightning-combobox>
+
+            <!-- Calculate Button -->
+            <div class="slds-m-top_large">
+                <lightning-button
+                    label="Calculate Match"
+                    variant="brand"
+                    onclick={handleCalculate}
+                    disabled={isCalculateDisabled}>
+                </lightning-button>
+            </div>
+
+            <!-- Loading -->
+            <template if:true={isLoading}>
+                <div class="slds-m-top_medium">
+                    <lightning-spinner
+                        alternative-text="Loading internship matching data"
+                        size="medium">
+                    </lightning-spinner>
+                </div>
+            </template>
+
+            <!-- Error -->
+            <template if:true={errorMessage}>
+                <div class="slds-text-color_error slds-m-top_medium">
+                    {errorMessage}
+                </div>
+            </template>
+
+            <!-- Matching Results -->
+            <template if:true={matchResult}>
+                <div class="result-section slds-m-top_large">
+
+                    <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+                        Matching Results
+                    </h2>
+
+                    <div class="score-grid">
+
+                        <div class="score-box">
+                            <p>Skill Match</p>
+                            <h3>{matchResult.Skill_Match__c}%</h3>
+                        </div>
+
+                        <div class="score-box">
+                            <p>Academic Match</p>
+                            <h3>{matchResult.Academic_Match__c}%</h3>
+                        </div>
+
+                        <div class="score-box">
+                            <p>Interest Match</p>
+                            <h3>{matchResult.Interest_Match__c}%</h3>
+                        </div>
+
+                        <div class="score-box overall">
+                            <p>Overall Match</p>
+                            <h3>{matchResult.Overall_Match__c}%</h3>
+                        </div>
+
+                    </div>
+
+                    <div class="slds-m-top_large">
+                        <template if:true={matchResult.Is_Eligible__c}>
+                            <div class="eligibility eligible">
+                                <lightning-icon
+                                    icon-name="utility:success"
+                                    size="small"
+                                    alternative-text="Eligible">
+                                </lightning-icon>
+                                <span>Eligible for this opportunity</span>
+                            </div>
+                        </template>
+
+                        <template if:false={matchResult.Is_Eligible__c}>
+                            <div class="eligibility not-eligible">
+                                <lightning-icon
+                                    icon-name="utility:error"
+                                    size="small"
+                                    alternative-text="Not eligible">
+                                </lightning-icon>
+                                <span>Not eligible for this opportunity</span>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="slds-m-top_medium">
+                        <p class="slds-text-title_bold">Match Explanation</p>
+                        <p class="reason-text">{matchResult.Match_Reason__c}</p>
+                    </div>
+
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

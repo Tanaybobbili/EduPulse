@@ -1,0 +1,190 @@
+
+<template>
+    <lightning-card
+        title="Career Readiness Simulator"
+        icon-name="standard:employee">
+
+        <div class="slds-p-around_medium">
+
+            <!-- Student Selection -->
+            <lightning-combobox
+                label="Select Student"
+                placeholder="Choose a student"
+                value={selectedStudentId}
+                options={studentOptions}
+                onchange={handleStudentChange}>
+            </lightning-combobox>
+
+            <!-- Current Student Metrics -->
+            <template if:true={studentData}>
+                <div class="slds-m-top_large">
+                    <h2 class="slds-text-heading_medium">
+                        Current Student Performance
+                    </h2>
+
+                    <p class="slds-m-top_small">
+                        Student: <strong>{studentData.studentName}</strong>
+                    </p>
+
+                    <div class="metric-grid slds-m-top_medium">
+                        <div class="metric-box">
+                            <p>CGPA</p>
+                            <h3>{studentData.cgpa}</h3>
+                        </div>
+
+                        <div class="metric-box">
+                            <p>Attendance</p>
+                            <h3>{studentData.attendance}%</h3>
+                        </div>
+
+                        <div class="metric-box">
+                            <p>Assessment</p>
+                            <h3>{studentData.assessmentScore}%</h3>
+                        </div>
+
+                        <div class="metric-box">
+                            <p>Skill Proficiency</p>
+                            <h3>{studentData.skillProficiency}%</h3>
+                        </div>
+
+                        <div class="metric-box">
+                            <p>Current Risk</p>
+                            <h3>{studentData.currentRisk}</h3>
+                        </div>
+
+                        <div class="metric-box">
+                            <p>Risk Category</p>
+                            <h3>{studentData.riskCategory}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-m-top_large">
+                    <h2 class="slds-text-heading_medium">
+                        Simulate Improvements
+                    </h2>
+
+                    <p class="slds-text-color_weak slds-m-top_x-small">
+                        Adjust the values below to explore hypothetical
+                        improvements. Actual student records will not change.
+                    </p>
+
+                    <!-- CGPA -->
+                    <div class="slider-section">
+                        <lightning-slider
+                            label="Projected CGPA"
+                            min="0"
+                            max="10"
+                            step="0.1"
+                            value={projectedCGPA}
+                            onchange={handleCGPAChange}>
+                        </lightning-slider>
+                        <span>{projectedCGPA} / 10</span>
+                    </div>
+
+                    <!-- Attendance -->
+                    <div class="slider-section">
+                        <lightning-slider
+                            label="Projected Attendance"
+                            min="0"
+                            max="100"
+                            step="1"
+                            value={projectedAttendance}
+                            onchange={handleAttendanceChange}>
+                        </lightning-slider>
+                        <span>{projectedAttendance}%</span>
+                    </div>
+
+                    <!-- Assessment -->
+                    <div class="slider-section">
+                        <lightning-slider
+                            label="Projected Assessment Score"
+                            min="0"
+                            max="100"
+                            step="1"
+                            value={projectedAssessment}
+                            onchange={handleAssessmentChange}>
+                        </lightning-slider>
+                        <span>{projectedAssessment}%</span>
+                    </div>
+
+                    <!-- Skill -->
+                    <div class="slider-section">
+                        <lightning-slider
+                            label="Projected Skill Proficiency"
+                            min="0"
+                            max="100"
+                            step="1"
+                            value={projectedSkill}
+                            onchange={handleSkillChange}>
+                        </lightning-slider>
+                        <span>{projectedSkill}%</span>
+                    </div>
+
+                    <div class="slds-m-top_large">
+                        <lightning-button
+                            label="Calculate Projection"
+                            variant="brand"
+                            onclick={handleSimulation}
+                            disabled={isLoading}>
+                        </lightning-button>
+
+                        <lightning-button
+                            label="Reset Values"
+                            variant="neutral"
+                            class="slds-m-left_small"
+                            onclick={handleReset}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Loading -->
+            <template if:true={isLoading}>
+                <lightning-spinner
+                    alternative-text="Calculating projection"
+                    size="medium">
+                </lightning-spinner>
+            </template>
+
+            <!-- Error -->
+            <template if:true={errorMessage}>
+                <div class="slds-text-color_error slds-m-top_medium">
+                    {errorMessage}
+                </div>
+            </template>
+
+            <!-- Projected Results -->
+            <template if:true={hasProjection}>
+                <div class="projection-section slds-m-top_large">
+                    <h2 class="slds-text-heading_medium">
+                        Projected Career Readiness
+                    </h2>
+
+                    <div class="result-grid slds-m-top_medium">
+                        <div class="result-box">
+                            <p>Projected Risk Score</p>
+                            <h3>{projectedRisk}%</h3>
+                        </div>
+
+                        <div class="result-box readiness">
+                            <p>Career Readiness</p>
+                            <h3>{careerReadiness}%</h3>
+                        </div>
+                    </div>
+
+                    <p class="slds-m-top_medium">
+                        Projected Risk Category:
+                        <strong>{projectedRiskCategory}</strong>
+                    </p>
+
+                    <p class="slds-text-color_weak slds-m-top_small">
+                        These are hypothetical results. No Salesforce
+                        student records have been modified.
+                    </p>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

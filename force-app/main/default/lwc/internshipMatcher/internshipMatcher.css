@@ -1,0 +1,79 @@
+
+.result-section {
+    border-top: 1px solid #dddbda;
+    padding-top: 1.5rem;
+}
+
+.score-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.score-box {
+    background: #f3f6f9;
+    border-radius: 8px;
+    padding: 1.2rem;
+    text-align: center;
+}
+
+.score-box p {
+    color: #444;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.score-box h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #16325c;
+}
+
+.score-box.overall {
+    background: #e8f3ff;
+    border: 1px solid #8abce8;
+}
+
+.score-box.overall h3 {
+    color: #0176d3;
+}
+
+.eligibility {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.eligible {
+    background: #e5f5e9;
+    color: #216e39;
+}
+
+.not-eligible {
+    background: #fdeaea;
+    color: #ba0517;
+}
+
+.reason-text {
+    background: #f8f8f8;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+@media screen and (max-width: 768px) {
+    .score-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .score-grid {
+        grid-template-columns: 1fr;
+    }
+}

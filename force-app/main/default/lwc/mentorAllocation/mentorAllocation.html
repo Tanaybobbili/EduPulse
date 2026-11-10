@@ -1,0 +1,120 @@
+
+<template>
+    <lightning-card
+        title="Mentor Allocation"
+        icon-name="standard:people">
+
+        <div class="slds-p-around_medium">
+
+            <!-- Student Selection -->
+            <lightning-combobox
+                label="Select Student"
+                placeholder="Choose a student"
+                value={selectedStudentId}
+                options={studentOptions}
+                onchange={handleStudentChange}
+                disabled={isLoading}>
+            </lightning-combobox>
+
+            <!-- Available Mentors -->
+            <div class="slds-m-top_large">
+                <div class="slds-grid slds-grid_align-spread slds-m-bottom_medium">
+                    <h2 class="slds-text-heading_medium">
+                        Available Mentors
+                    </h2>
+
+                    <lightning-button
+                        label="Refresh"
+                        icon-name="utility:refresh"
+                        onclick={loadMentors}
+                        disabled={isLoading}>
+                    </lightning-button>
+                </div>
+
+                <template if:true={isLoading}>
+                    <lightning-spinner
+                        alternative-text="Loading mentor information"
+                        size="medium">
+                    </lightning-spinner>
+                </template>
+
+                <template if:true={hasMentors}>
+                    <div class="mentor-grid">
+                        <template for:each={mentors} for:item="mentor">
+                            <div key={mentor.Id} class="mentor-card">
+
+                                <div class="mentor-header">
+                                    <lightning-icon
+                                        icon-name="standard:avatar"
+                                        size="medium"
+                                        alternative-text="Mentor">
+                                    </lightning-icon>
+
+                                    <div class="mentor-info">
+                                        <h3>{mentor.Mentor_Name__c}</h3>
+                                        <p>{mentor.Department__c}</p>
+                                    </div>
+                                </div>
+
+                                <div class="mentor-details">
+                                    <p>
+                                        <strong>Email:</strong>
+                                        {mentor.Email__c}
+                                    </p>
+
+                                    <p>
+                                        <strong>Expertise:</strong>
+                                        {mentor.Expertise__c}
+                                    </p>
+
+                                    <p>
+                                        <strong>Availability:</strong>
+                                        {mentor.Availability__c}
+                                    </p>
+
+                                    <p>
+                                        <strong>Current Mentees:</strong>
+                                        {mentor.Current_Mentees__c}
+                                        /
+                                        {mentor.Maximum_Capacity__c}
+                                    </p>
+                                </div>
+
+                                <lightning-button
+                                    label="Assign Mentor"
+                                    variant="brand"
+                                    data-id={mentor.Id}
+                                    onclick={handleAssign}
+                                    disabled={isLoading}>
+                                </lightning-button>
+
+                            </div>
+                        </template>
+                    </div>
+                </template>
+
+                <template if:false={hasMentors}>
+                    <template if:false={isLoading}>
+                        <div class="empty-state">
+                            No mentors with available capacity were found.
+                        </div>
+                    </template>
+                </template>
+            </div>
+
+            <!-- Messages -->
+            <template if:true={successMessage}>
+                <div class="success-message slds-m-top_medium">
+                    {successMessage}
+                </div>
+            </template>
+
+            <template if:true={errorMessage}>
+                <div class="error-message slds-m-top_medium">
+                    {errorMessage}
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

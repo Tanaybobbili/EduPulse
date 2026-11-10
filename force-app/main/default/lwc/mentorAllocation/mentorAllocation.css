@@ -1,0 +1,72 @@
+
+.mentor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.mentor-card {
+    border: 1px solid #dddbda;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+}
+
+.mentor-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.mentor-info h3 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.mentor-info p {
+    color: #706e6b;
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+}
+
+.mentor-details {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.mentor-details p {
+    margin-bottom: 0.25rem;
+}
+
+.mentor-card lightning-button {
+    align-self: flex-start;
+}
+
+.empty-state {
+    padding: 1.5rem;
+    text-align: center;
+    background: #f3f3f3;
+    border-radius: 0.5rem;
+    color: #706e6b;
+    margin-top: 1rem;
+}
+
+.success-message {
+    padding: 0.75rem;
+    background: #e5f5e5;
+    color: #216e21;
+    border-radius: 0.35rem;
+}
+
+.error-message {
+    padding: 0.75rem;
+    background: #fde7e7;
+    color: #ba0517;
+    border-radius: 0.35rem;
+}
