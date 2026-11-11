@@ -1,4 +1,3 @@
-
 public with sharing class RiskAnalyticsController {
 
     public class RiskAnalyticsData {

@@ -1,4 +1,3 @@
-
 public with sharing class Student360Controller {
 
     // Wrapper containing all information for one student.

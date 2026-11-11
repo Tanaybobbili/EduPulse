@@ -1,4 +1,3 @@
-
 import { LightningElement, api, wire } from 'lwc';
 import getStudentDetails from
     '@salesforce/apex/Student360Controller.getStudentDetails';

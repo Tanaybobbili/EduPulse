@@ -1,4 +1,3 @@
-
 @isTest
 private class StudentRiskIntegrationTest {
 

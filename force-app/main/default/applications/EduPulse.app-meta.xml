@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <content>EduPulse_Home</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+    </actionOverrides>
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <logo>Screenshot_20261110_225802</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>Student Success, Academic Intelligence, Mentorship and Career Opportunity Management System</description>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>EduPulse</label>
+    <navType>Standard</navType>
+    <tabs>standard-home</tabs>
+    <tabs>EduPulse_Dashboard</tabs>
+    <tabs>EduPulse_Student_Management</tabs>
+    <tabs>EduPulse_Risk_Analytics</tabs>
+    <tabs>EduPulse_Mentor_Allocation</tabs>
+    <tabs>EduPulse_Internship_Matcher</tabs>
+    <tabs>EduPulse_Career_Readiness_Simulator</tabs>
+    <tabs>Student__c</tabs>
+    <tabs>Career_Opportunity__c</tabs>
+    <tabs>Mentor__c</tabs>
+    <tabs>Mentorship__c</tabs>
+    <tabs>Intervention__c</tabs>
+    <tabs>Application__c</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>EduPulse_UtilityBar</utilityBar>
+</CustomApplication>

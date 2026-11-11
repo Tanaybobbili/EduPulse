@@ -1,4 +1,3 @@
-
 public with sharing class StudentDashboardController {
 
     // Data returned to the LWC dashboard.

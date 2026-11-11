@@ -1,4 +1,3 @@
-
 import { LightningElement, wire } from 'lwc';
 
 import getStudents

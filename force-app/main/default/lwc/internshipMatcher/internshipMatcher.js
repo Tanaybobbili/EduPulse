@@ -1,4 +1,3 @@
-
 import { LightningElement, wire } from 'lwc';
 import getStudents from '@salesforce/apex/InternshipMatchingController.getStudents';
 import getOpportunities from '@salesforce/apex/InternshipMatchingController.getOpportunities';

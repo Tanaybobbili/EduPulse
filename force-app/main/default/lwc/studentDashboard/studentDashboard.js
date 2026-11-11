@@ -1,4 +1,3 @@
-
 import { LightningElement, wire } from 'lwc';
 import getDashboardData from
     '@salesforce/apex/StudentDashboardController.getDashboardData';

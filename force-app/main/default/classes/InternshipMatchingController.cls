@@ -1,4 +1,3 @@
-
 public with sharing class InternshipMatchingController {
 
     // Fetch active students for the selection dropdown.

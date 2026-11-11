@@ -36,6 +36,21 @@
                 <label>Reminder</label>
             </value>
             <value>
+                <fullName>Student Registration</fullName>
+                <default>false</default>
+                <label>Student Registration</label>
+            </value>
+            <value>
+                <fullName>Attendance Alert</fullName>
+                <default>false</default>
+                <label>Attendance Alert</label>
+            </value>
+            <value>
+                <fullName>Assessment Alert</fullName>
+                <default>false</default>
+                <label>Assessment Alert</label>
+            </value>
+            <value>
                 <fullName>Other</fullName>
                 <default>false</default>
                 <label>Other</label>

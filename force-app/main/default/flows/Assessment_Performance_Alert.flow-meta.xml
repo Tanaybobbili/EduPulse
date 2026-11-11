@@ -37,17 +37,21 @@
     <label>Assessment Performance Alert</label>
     <processMetadataValues>
         <name>BuilderType</name>
-        <value>LightningFlowBuilder</value>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
     </processMetadataValues>
-
     <processMetadataValues>
         <name>CanvasMode</name>
-        <value>AUTO_LAYOUT_CANVAS</value>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
     </processMetadataValues>
-
     <processMetadataValues>
         <name>OriginBuilderType</name>
-        <value>LightningFlowBuilder</value>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordCreates>

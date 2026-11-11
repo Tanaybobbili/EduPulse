@@ -1,4 +1,3 @@
-
 public with sharing class StudentRiskBatch
     implements Database.Batchable<SObject> {
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>decorate</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>richTextValue</name>
+                    <value>&lt;h2&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;&lt;img src=&quot;https://orgfarm-3756ddf23f-dev-ed.develop.file.force.com/servlet/rtaImage?refid=0EMjV000001yDHx&quot;&gt;&lt;/span&gt; &lt;strong style=&quot;font-size: 72px; font-family: sans-serif; color: rgb(160, 59, 59);&quot;&gt;Welcome to EduPulse                              &lt;/strong&gt;&lt;/h2&gt;&lt;h1&gt;&lt;strong style=&quot;font-size: 72px; font-family: sans-serif; color: rgb(160, 59, 59);&quot;&gt;&lt;span class=&quot;ql-cursor&quot;&gt;﻿&lt;/span&gt; &lt;/strong&gt;&lt;code style=&quot;font-family: sans-serif;&quot;&gt;&lt;strong&gt;Student Success, Academic Intelligence and Career Management&lt;/strong&gt;&lt;/code&gt;&lt;/h1&gt;</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:richText</componentName>
+                <identifier>flexipage_richText</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>dashboardName</name>
+                    <value>FgXsCtDUVetinpgeioPSMlMAMaYUli</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>hideOnError</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentName>desktopDashboards:embeddedDashboard</componentName>
+                <identifier>desktopDashboards_embeddedDashboard</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>main</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <masterLabel>EduPulse Home</masterLabel>
+    <template>
+        <name>industries_common:homeTemplateOneRegion</name>
+    </template>
+    <type>HomePage</type>
+</FlexiPage>

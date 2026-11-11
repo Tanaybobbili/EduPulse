@@ -1,4 +1,3 @@
-
 public with sharing class CareerReadinessController {
 
     // Data returned to the LWC.
